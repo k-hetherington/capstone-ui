@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@500&display=swap');
+
+.text{
+    font-family : 'Arima Madurai', cursive ;
+}
+
+.navBar{
+    width: 100%,
+}
+
+.navbar-titles{
+    list-style-type: none;
+    display: flex;
+    
+    justify-content: space-between;
+
+    font-family: 'Arima Madurai', cursive ;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    
+    text-align: center;
+    letter-spacing: -0.015em;
+    
+    color: #000000;
+    
+
+}
+.navbar-titles:visited{
+    text-decoration: none;
+    color:black;
+
+}
+
+.navbar-titles:link{
+    text-decoration: none;
+
+    color:black;    
+}
+
+Button{
+    font-family: 'Arima Madurai', cursive ;
+    font-size: 27px;
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+
+}
+
+.login{
+    font-family: 'Arima Madurai', cursive ;
+    font-size: 27px;
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    padding: 3px 3px;
+
+}
+.register{
+    font-family: 'Arima Madurai', cursive ;
+    font-size: 27px;
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+
+}
