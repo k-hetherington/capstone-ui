@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import StateTextFields from './TextArea';
 import { useModalForm } from '../../hooks/useModalForm'; 
-import { Button, Box } from '@material-ui/core';
+import { Button, Box, withStyles } from '@material-ui/core';
 import "./Profile.css"
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -25,13 +25,19 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     width: 400,
     backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
+    border: '3px solid #2EC4B6',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
 }));
 
 export default function SimpleModal() {
+  const StyledButton = withStyles({
+    root:{
+        borderRadius:1,
+        border: '1px solid black',
+    },
+})(Button);
   const classes = useStyles();
   const {handleOnChange, handleOnSubmit, errors, isProcessing, form, setForm} = useModalForm()
   // getModalStyle is not a pure function, we roll the style only on the first render
@@ -48,16 +54,16 @@ export default function SimpleModal() {
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <h2 id="simple-modal-title">Please Enter Image Url</h2>
+      <h2 id="simple-modal-title">Please Enter Image Url or Upload an Image</h2>
       <StateTextFields handleOnSubmit={handleOnSubmit} form={form} setForm={setForm}/>
     </div>
   );
 
   return (
     <div>
-      <Button type="button" onClick={handleOpen}>
-      <Box className="text" border={1}>  Add Profile Picture</Box>
-      </Button>
+      <StyledButton type="button" onClick={handleOpen}>
+        Add Profile Picture
+      </StyledButton>
       <Modal
         open={open}
         onClose={handleClose}
