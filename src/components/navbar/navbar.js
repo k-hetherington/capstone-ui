@@ -7,9 +7,8 @@ import {  Container} from "@material-ui/core"
 import StyledMenu from "../Menu/Menu"
 
 export default function Navbar({ user, logoutUser, isAuthenticated, intialized }){
-
     return (
-         <Container style={{ backgroundColor: '#FFFFFF', height: '5vh'}}>
+         <Container style={{ backgroundColor: '#cbf3f0', height: '5vh', width: 1235}}>
             <nav>
                 <ul className="navbar-titles">
                     <li>
