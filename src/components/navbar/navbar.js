@@ -36,7 +36,7 @@ export default function Navbar({ user, logoutUser, isAuthenticated, intialized }
                     {/* isAuthenticated is 'false'  by default so if true show the logout button if still false show 
                     the login and register button*/}
                     { !isAuthenticated? (
-                    <StyledMenu logoutUser={logoutUser}/>
+                    <StyledMenu logoutUser={logoutUser} user={user}/>
                     ):(<><Button className="login" variant="outlined" size='small'>
                         <Link to="/login">
                             Log In

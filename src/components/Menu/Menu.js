@@ -5,7 +5,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router';
-
+import{ Avatar } from '@material-ui/core'
 const StyledMenu = withStyles({
   paper: {
     border: '1px solid #d3d4d5',
@@ -37,7 +37,7 @@ const StyledMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem);
 
-export default function CustomizedMenus({logoutUser}) {
+export default function CustomizedMenus({user, logoutUser}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -57,15 +57,22 @@ export default function CustomizedMenus({logoutUser}) {
   }
   return (
     <div>
+      {user.profile_pic? (<Avatar src={user.profile_pic} style={{ height: '30px', width: '30px' }} 
+      aria-controls="customized-menu"
+      aria-haspopup="true"
+      onClick={handleClick}></Avatar>):
+      (
       <PersonOutlineOutlinedIcon
-        aria-controls="customized-menu"
-        aria-haspopup="true"
-        variant="contained"
-        fontSize="large"
-        // color="black"
-        onClick={handleClick}
-      >
-      </PersonOutlineOutlinedIcon>
+      aria-controls="customized-menu"
+      aria-haspopup="true"
+      variant="contained"
+      fontSize="medium"
+      // color="black"
+      onClick={handleClick}
+    >
+    </PersonOutlineOutlinedIcon>
+      )}
+
       <StyledMenu
         id="customized-menu"
         anchorEl={anchorEl}
