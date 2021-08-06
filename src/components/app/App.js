@@ -30,7 +30,7 @@ export default function AppContainer(){
 const App = ()=> {
 
     const {user, setUser, initialized, setInitialized, donations, setDonations, recycles, setRecycles, error, setError, 
-      donateNumber, setDonateNumber, recycleNumber, setRecycleNumber, freeProducts, setFreeProducts} = useAuthContext()
+      donateNumber, setDonateNumber, recycleNumber, setRecycleNumber, points, setPoints} = useAuthContext()
 
     
     //itinnialed by default is false i changed user?.email(true if email is found false if not) to !user?.email(fa)
@@ -54,48 +54,27 @@ const App = ()=> {
       }, [isAuthenticated])
       
       
+      //Rendering all user had donated
       const fetchDonations = async () => { console.log("Here!!")
         const { data, error } = await apiClient.fetchDonations()
         if (error) setError(error)
         if (data?.donations) {
-          //console.log(data.donations)
           setDonations(data.donations)
-          //console.log(data.donations[0].created_at)
         }
       }
       
-      //Rendering all user had donated
-      useEffect(() => {
-        
-        // fetchDonations()
-      }, [])
-
-       
+      
+       //Rendering all user has recycled
       const fetchRecycles = async () => {
         const { data, error } = await apiClient.fetchRecycles()
         if (error) setError(error)
         if (data?.recycles) {
-          //console.log(data.donations)
           setRecycles(data.recycles)
-         // console.log(data.donations[0].created_at)
         }
       }
       
-      //Rendering all user has recycled
-      useEffect(() => {
-       
-        
-        // fetchRecycles()
-      }, [])
 
-
-
-    //Rendering Number of donations and Number of Recycles
-      useEffect(() => {
-        
-        ProfileApp()
-      }, [])
-      
+    //Rendering Number of donations and Number of Recycles    
       const ProfileApp = async () => {
           const { data } = await apiClient.fetchNumberDonationsRecycled()
           if (data)  {
@@ -103,7 +82,19 @@ const App = ()=> {
          setDonateNumber(data.donationNumber)
          }
       }
-      
+      const pointsData = async () =>{
+        const {data} = await apiClient.viewPoints()
+        if (data){
+          setPoints(data.pointNumber)
+          console.log(data.pointNumber)
+        }
+      }
+
+      useEffect(() => {
+        
+        ProfileApp()
+        pointsData()
+      }, [])
 
 
         const clearAppState = () => {
@@ -124,7 +115,7 @@ const App = ()=> {
                 <Routes>
                     <Route path = "/tips" element={ <Tips /> }/>
 
-                    <Route path="/give" element={ <Give user={user} setUser={setUser} setDonateNumber={setDonateNumber} setRecycleNumber={setRecycleNumber} setDonations={setDonations} setRecycles={setRecycles} initialized={initialized} setFreeProducts={setFreeProducts}/> }/>
+                    <Route path="/give" element={ <Give user={user} setUser={setUser} setDonateNumber={setDonateNumber} setRecycleNumber={setRecycleNumber} setDonations={setDonations} setRecycles={setRecycles} initialized={initialized} setPoints={setPoints} points={points}/> }/>
 
                     <Route path="/give/giveSuccess" element={ <GiveSuccess user={user} setUser={setUser} /> }/>
                     <Route path="/give/giveUnauthorized" element={ <GiveUnauthorized /> }/>
@@ -134,30 +125,33 @@ const App = ()=> {
 
                     <Route path="/register" element={ <Register user={user} setUser={setUser} />}/>
                     <Route path="/login" element={ <Login user={user} setUser={setUser}/>}/>
-                    <Route path="/profile" element={ <Profile user={user} fetchDonations={fetchDonations} fetchRecycles={fetchRecycles} ProfileApp={ProfileApp} logoutUser={logoutUser} donateNumber={donateNumber} recycleNumber={recycleNumber} setDonateNumber={setDonateNumber} setRecycleNumber={setRecycleNumber} freeProducts={freeProducts} setFreeProducts={setFreeProducts}/>}/>
+                    <Route path="/profile" element={ <Profile user={user} fetchDonations={fetchDonations} fetchRecycles={fetchRecycles} ProfileApp={ProfileApp} logoutUser={logoutUser} donateNumber={donateNumber} recycleNumber={recycleNumber} setDonateNumber={setDonateNumber} setRecycleNumber={setRecycleNumber} points={points} pointsData={pointsData}/>}/>
                     <Route path="/profile/donations" element={ <UserDonations 
                                                                 user={user} 
                                                                 setUser={setUser}
-                                                                //setDonations={setDonations}
                                                                 donations={donations} 
+                                                                ProfileApp={ProfileApp}
+                                                                fetchDonations={fetchDonations}
                                                                 donateNumber={donateNumber}
                                                                 /> } />
 
                     <Route path="/profile/recycles" element={ <UserRecycles
-                                                                                    user={user} 
-                                                                                    setUser={setUser}
-                                                                                    //setDonations={setDonations}
-                                                                                    recycles={recycles} 
-                                                                                    recycleNumber={recycleNumber}
-                                                                                    /> } />
+                                                                user={user} 
+                                                                setUser={setUser}
+                                                                recycles={recycles} 
+                                                                ProfileApp={ProfileApp}
+                                                                fetchRecycles={fetchRecycles}
+                                                                recycleNumber={recycleNumber}
+                                                                /> } />
 
                     <Route path="/profile/settings" element={ <Settings user={user}/>}/>
-                    <Route path="/points" element={<Points donateNumber={donateNumber} recycleNumber={recycleNumber} setDonateNumber={setDonateNumber} setRecycleNumber={setRecycleNumber} freeProducts={freeProducts} setFreeProducts={setFreeProducts}/>}/>
+                    <Route path="/points" element={<Points donateNumber={donateNumber} recycleNumber={recycleNumber} setDonateNumber={setDonateNumber} setRecycleNumber={setRecycleNumber} points={points} setPoints={setPoints} setError={setError} pointsData={pointsData}/>}/>
 
                 </Routes>
             </BrowserRouter>
         </div>
     )
 }
+
 
 
