@@ -92,14 +92,14 @@ wrapper: {
     height:580,
     marginTop:'10px',
     margin: "auto",
-    background: `linear-gradient(
-        rgba(245, 245, 245, 1),
-        rgba(0, 0, 0, .0)
+    // background: `linear-gradient(
+    //     rgba(245, 245, 245, 1),
+    //     rgba(0, 0, 0, .0)
         
-      )
-     ,url(https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/packaging-1565375161.png?resize=980:*)`,
-    // backgroundColor: `linear-gradient( rgba(0, 0, 0, 0.5), `
-    backgroundRepeat: 'no-repeat',
+    //   )
+    //  ,url(https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/packaging-1565375161.png?resize=980:*)`,
+    // // backgroundColor: `linear-gradient( rgba(0, 0, 0, 0.5), `
+    // backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
 
 },
@@ -117,6 +117,10 @@ overlay:{
     // backgroundColor:'rgba(0,0,0,.2)',
     // opacity:'0.5',
     // padding:'50%',
+    // '& .MuiCardContent-root':{
+    //     padding: 0,
+    //   },
+    padding: 0,
 
 },
 
@@ -311,7 +315,7 @@ export default function Home({ user, isAuthenticated }) {
                 </a>
         )
     } 
-    {/* <video autoPlay loop muted
+    <video autoPlay loop muted
             style={{
                 top: 0,
                 left: 0,
@@ -323,7 +327,7 @@ export default function Home({ user, isAuthenticated }) {
                 opacity: 0.45,
             }}>
             <source src={Hiravideo} type="video/mp4"/>     
-    </video>  */}
+    </video> 
     </CardContent>
     </Box>
 

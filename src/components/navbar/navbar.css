@@ -6,6 +6,7 @@
 
 .navBar{
     display: flex;
+    margin-bottom: 0;
 }
 
 .navbar-titles{
@@ -35,7 +36,6 @@
 
 .navbar-titles:link{
     text-decoration: none;
-
     color:black;    
 }
 

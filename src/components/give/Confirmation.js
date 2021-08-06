@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
         fontStyle: "normal",
         fontWeight: "normal",
         padding: 50,
-        fontSize: 20,
+        fontSize: 30,
         
     },
   
@@ -22,11 +22,9 @@ export default function Confirmation({center}) {
     return (
         <Box>
             <Typography variant="h1" className={classes.title}>
-            {`Thank you for choosing Hira! Please drop off your products at ${center} between 10am and 6pm.`}
+                {`Thank you for choosing Hira! Please drop off your products at ${center} between 10am and 6pm.`}
             </Typography>
         </Box>
-        
-        
     );
 }
 
