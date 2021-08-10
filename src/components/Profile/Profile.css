@@ -64,6 +64,11 @@
 }
 .settings{
     padding-bottom:10%;
+   
+}
+
+.lighter{
+    font-weight: lighter;
 }
 .btns{
     padding-bottom: 5%;

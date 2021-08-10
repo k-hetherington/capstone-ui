@@ -76,6 +76,8 @@ formControl: {
 submit: {
     margin: theme.spacing(3, 0, 2),
     width:'8rem',
+    
+    
   },
 
 typography:{
@@ -311,7 +313,7 @@ export default function Give({ user, setUser, setDonateNumber, setDonations, set
                   <Button
                         type="submit"
                         fullWidth
-                        variant="contained"
+                        variant="outlined"
                         className={classes.submit}
                         disabled={isProcessing} 
                         onClick={handleOnSubmit} >

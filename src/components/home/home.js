@@ -95,8 +95,9 @@ heroSection:{
 },
 wrapper: {
     height:580,
-    marginTop:'10px',
+    // marginTop:'10px',
     margin: "auto",
+    padding: 0,
     // background: `linear-gradient(
     //     rgba(245, 245, 245, 1),
     //     rgba(0, 0, 0, .0)
@@ -142,6 +143,10 @@ title: {
     letterSpacing: "-0.015em",
     color: "#00000",
     fontWeight:'10',
+
+    display: "flex",
+    flexWrap: "wrap",
+
     opacity: 3,
     zIndex: 4,
 
@@ -160,11 +165,12 @@ title: {
 
 },
 subtitle: {
-    width: "60%",
-    maxWidth: "60%",
-    marginLeft: "auto",
-    marginRight: "auto",
-    marginTop: 220,
+   
+    maxWidth: "40%",
+    display: "flex",
+    flexWrap: "wrap",
+    // marginRight: "auto",
+    marginTop: 210,
     padding: 20,
     fontFamily: "Arima Madurai",
     fontStyle: "normal",
@@ -172,6 +178,7 @@ subtitle: {
     fontSize: 20,
     position: "absolute",
     textAlign: "center",
+    alignItems: "center",
     // letterSpacing: "-0.015em",
     color: "#000000",
     
@@ -211,6 +218,8 @@ registerBTN: {
     opacity: 3,
     zIndex: 5,
 
+    // display: "flex",
+    // // flexWrap: "wrap",
     // marginTop: 10, // space between outer edge and adjacent elements 
     // paddingTop:10, //space between content , outer edge
     // width: 270,
@@ -229,7 +238,6 @@ registerBTN: {
 bottom: {
     display: "Flex",
     padding: 40,
-    marginTop: 5,
     fontFamily: "Arima Madurai",
     fontStyle: "normal",
     fontWeight: "normal",
@@ -325,7 +333,7 @@ export default function Home({ user, isAuthenticated }) {
                 top: 0,
                 left: 0,
                 height:580,
-                width: 1220,
+                width: 1232.8,
                 margin: "auto",
                 objectFit: "cover",
                 zIndex: -2,
@@ -337,7 +345,8 @@ export default function Home({ user, isAuthenticated }) {
     </Box>
 
     <Typography className={classes.bottom}>
-        We accept most skincare and makeup products for donations and recycling. We priotize  the products that most people use as part of their daily routine. Whether they come in paper, plastic, or glass, we will gladly accept them. Here are some examples of what we accept.
+        We accept most skincare and makeup products for donations and recycling. We priotize the products that most people use as part of their daily routine. 
+        Whether they come in paper, plastic, or glass, we will gladly accept them. Here are some of examples what we accept.
     </Typography>
    
 

@@ -6,12 +6,14 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { FormControl } from '@material-ui/core';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
+import {Link as Rlink} from 'react-router-dom';  
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import "./Login.css"
+
 import { useLoginForm } from "../../hooks/useLoginForm"
 
 function Copyright() {
@@ -112,9 +114,9 @@ export default function Login() {
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
-              <Link to="/register" variant="body2" >
-                <div className="text">Don't have an account? Register</div>
-              </Link>
+              <Rlink to="/register" >
+                  <div className="blue">Don't have an account? Register</div>
+              </Rlink>
             </Grid>
           </Grid>
         </form>
