@@ -7,10 +7,15 @@ import { Box, Typography, makeStyles, Grid, Link, Container, Image, CardMedia, C
 
 //for grids
 import Paper from '@material-ui/core/Paper';
+import { findByLabelText } from '@testing-library/react';
 
 
 //useStyles is like CSS in js
 const useStyles = makeStyles((theme) => ({
+    root:{
+        display:'flex',
+        justifyContent:'center'
+    },
 
 moisturizerPaper: {
     height: 320,
@@ -220,7 +225,7 @@ productSubtitle: {
     marginTop: 15,
     marginBottom: 10,
     // marginLeft: 80,
-    textAlign: "center",
+    textAlign: "left",
     letterSpacing: "-0.015em",
     color: "#756F6F;"
     
@@ -276,7 +281,7 @@ export default function Home({ user, isAuthenticated }) {
     
 
     <Typography className={classes.bottom}>
-        We accept most skincare and makeup products for donations and recycling. We priotize  the products that most people use as part of their daily routine. Whether they come in paper, plastic, or glass, we will gladly accept them. Here are some of examples of what we accept....
+        We accept most skincare and makeup products for donations and recycling. We priotize  the products that most people use as part of their daily routine. Whether they come in paper, plastic, or glass, we will gladly accept them. Here are some examples of what we accept.
     </Typography>
    
 
@@ -288,11 +293,11 @@ export default function Home({ user, isAuthenticated }) {
         <Grid className="skincare-examples">
             <Grid container className={classes.root} spacing={2}>
                 <Grid item xs={12}>
-                    <Grid container spacing={10}>
+                    <Grid container spacing={10} >
                         {[0].map((value) => (
                             <Grid key={value} item>
                             <Paper className={classes.moisturizerPaper} />
-                                <Box>
+                                <Box width ='250px'>
                                     <Typography className={classes.productTitle}>
                                         Moisturizers + Sun
                                     </Typography>
@@ -305,7 +310,7 @@ export default function Home({ user, isAuthenticated }) {
                         {[1].map((value) => (
                             <Grid key={value} item>
                             <Paper className={classes.cleanserPaper} />
-                                <Box>
+                                <Box width ='250px'>
                                     <Typography className={classes.productTitle}>
                                         Cleansers
                                     </Typography>
@@ -318,7 +323,7 @@ export default function Home({ user, isAuthenticated }) {
                         {[2].map((value) => (
                             <Grid key={value} item>
                             <Paper className={classes.serumPaper} />
-                                <Box>
+                                <Box width ='250px'>
                                     <Typography className={classes.productTitle}>
                                         Serums
                                     </Typography>
@@ -343,20 +348,20 @@ export default function Home({ user, isAuthenticated }) {
                     {[0].map((value) => (
                             <Grid key={value} item>
                             <Paper className={classes.powderPaper} />
-                                <Box>
+                                <Box width='250px'>
                                     <Typography className={classes.productTitle}>
                                         Powder
                                     </Typography>
                                     <Typography className={classes.productSubtitle}>
-                                        Usually comes in plastic or glass containers.
-                                    </Typography>
+                                        Usually comes in plastic or glass containers.    
+                                   </Typography>
                                 </Box>
                             </Grid>
                         ))}
                         {[1].map((value) => (
                             <Grid key={value} item>
                             <Paper className={classes.mascaraPaper} />
-                                <Box>
+                                <Box width ='250px'>
                                     <Typography className={classes.productTitle}>
                                         Mascaras
                                     </Typography>
@@ -369,7 +374,7 @@ export default function Home({ user, isAuthenticated }) {
                         {[2].map((value) => (
                             <Grid key={value} item>
                             <Paper className={classes.foundationPaper} />
-                                <Box>
+                                <Box width ='250px'>
                                     <Typography className={classes.productTitle}>
                                     Liquid Foundations
                                     </Typography>
@@ -382,7 +387,7 @@ export default function Home({ user, isAuthenticated }) {
                         {[3].map((value) => (
                             <Grid key={value} item>
                             <Paper className={classes.perfumePaper} />
-                                <Box>
+                                <Box width ='250px'>
                                     <Typography className={classes.productTitle}>
                                         Perfumes
                                     </Typography>
