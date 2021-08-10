@@ -2,9 +2,9 @@ import './home.css';
 import React from 'react';
 //import ReactDOM from 'react-dom';
 import Button from "@material-ui/core/Button"
-import { Box, Typography, makeStyles, Grid, Link, Container, Image, CardMedia, CardContent } from "@material-ui/core"
+import { Box, Typography, makeStyles, Grid, Link, Container, Image, CardMedia, CardContent, FormHelperText } from "@material-ui/core"
 //import Container from '@material-ui/core/Container';
-
+import Hiravideo from "../video/hiravideo.mp4"; 
 //for grids
 import Paper from '@material-ui/core/Paper';
 import { findByLabelText } from '@testing-library/react';
@@ -56,7 +56,6 @@ foundationPaper: {
     backgroundSize: 'cover',
     //  marginLeft: 70,
     padding: 25,
-    
         
 },
 mascaraPaper: {
@@ -97,19 +96,16 @@ heroSection:{
 wrapper: {
     height:580,
     marginTop:'10px',
-    
     margin: "auto",
-    background: `linear-gradient(
-        rgba(245, 245, 245, 1),
-        rgba(0, 0, 0, .0)
+    // background: `linear-gradient(
+    //     rgba(245, 245, 245, 1),
+    //     rgba(0, 0, 0, .0)
         
-      )
-     ,url(https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/packaging-1565375161.png?resize=980:*)`,
-    // backgroundColor: `linear-gradient( rgba(0, 0, 0, 0.5), `
-    backgroundRepeat: 'no-repeat',
+    //   )
+    //  ,url(https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/packaging-1565375161.png?resize=980:*)`,
+    // // backgroundColor: `linear-gradient( rgba(0, 0, 0, 0.5), `
+    // backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
-    
-    
 
 },
 
@@ -126,43 +122,84 @@ overlay:{
     // backgroundColor:'rgba(0,0,0,.2)',
     // opacity:'0.5',
     // padding:'50%',
+    // '& .MuiCardContent-root':{
+    //     padding: 0,
+    //   },
+    padding: 0,
 
 },
 
 title: {
     fontFamily: "Arima Madurai",
     fontStyle: "normal",
+    marginLeft: 300,
+    marginTop: 100,
     // fontWeight: "bold",
     fontSize: 55,
     // marginTop: 20,
-    paddingTop: 100,
+    position: "absolute",
     margin: "auto",
     letterSpacing: "-0.015em",
-    color: "#000000",
+    color: "#00000",
     fontWeight:'10',
-    opacity:1,
+    opacity: 3,
+    zIndex: 4,
+
+    // fontFamily: "Arima Madurai",
+    // fontStyle: "normal",
+    // // fontWeight: "bold",
+    // fontSize: 55,
+    // // marginTop: 20,
+    // paddingTop: 100,
+    // margin: "auto",
+    // letterSpacing: "-0.015em",
+    // color: "#000000",
+    // fontWeight:'10',
+    // opacity:1,
+
 
 },
 subtitle: {
-    width: "70%",
+    width: "60%",
+    maxWidth: "60%",
     marginLeft: "auto",
     marginRight: "auto",
+    marginTop: 220,
     padding: 20,
     fontFamily: "Arima Madurai",
     fontStyle: "normal",
     fontWeight: "heavy",
     fontSize: 20,
+    position: "absolute",
     textAlign: "center",
     // letterSpacing: "-0.015em",
     color: "#000000",
+    
+    opacity: 5,
+    zIndex: 3,
+
+    // width: "70%",
+    // marginLeft: "auto",
+    // marginRight: "auto",
+    // padding: 20,
+    // fontFamily: "Arima Madurai",
+    // fontStyle: "normal",
+    // fontWeight: "heavy",
+    // fontSize: 20,
+    // textAlign: "center",
+    // // letterSpacing: "-0.015em",
+    // color: "#000000",
+
 
 },
 registerBTN: {
-    marginTop: 10, // space between outer edge and adjacent elements 
     paddingTop:10, //space between content , outer edge
     width: 270,
+    marginTop: 370,
+    marginLeft: 500,
     // height: 70,
     marginBottom: 15,
+    position: "absolute",
     fontFamily: "Arima Madurai",
     fontStyle: "normal",
     fontWeight: "normal",
@@ -171,11 +208,26 @@ registerBTN: {
     letterSpacing: "-0.015em",
     background: "#cbf3f0",
     // color: "#FFFFFF",
+    opacity: 3,
+    zIndex: 5,
+
+    // marginTop: 10, // space between outer edge and adjacent elements 
+    // paddingTop:10, //space between content , outer edge
+    // width: 270,
+    // // height: 70,
+    // marginBottom: 15,
+    // fontFamily: "Arima Madurai",
+    // fontStyle: "normal",
+    // fontWeight: "normal",
+    // fontSize: 25,
+    // textAlign: "center",
+    // letterSpacing: "-0.015em",
+    // background: "#cbf3f0",
+    // // color: "#FFFFFF",
 
 },
 bottom: {
     display: "Flex",
-    // width: '100vw',
     padding: 40,
     marginTop: 5,
     fontFamily: "Arima Madurai",
@@ -231,7 +283,6 @@ productSubtitle: {
     
 },
 
-
 }));
 
 export default function Home({ user, isAuthenticated }) {
@@ -239,46 +290,51 @@ export default function Home({ user, isAuthenticated }) {
   const classes = useStyles(); //classes invokes useStyles hook
 //   const { hero } = props;
 
-
   const handleChange = (event) => {
     setSpacing(Number(event.target.value));
   };
 
   return (
-
+     
  <Container maxWidth="lg" minwidth='600px' style={{ backgroundColor: '#ffffff',height: '100vh' }}> 
-    
     <Box className={classes.wrapper}>
-        {/* <CardMedia className={classes.wrapper} /> */}
-        <CardContent className={classes.overlay}>
-            <Typography variant="h1" className={classes.title}>
-                    "Making Beauty Sustainable"
-            </Typography>
-            
-            <Typography variant="body1" className={classes.subtitle}>
-                   The beauty industry creates 120 billion units of packaging every year. 
-                   {/* In 2015, research found that packaging accounted for 146 million tonnes of plastic every year. */}
-                   Our goal is to make beauty more sustainable by giving people the opportunity to donate or recycle their beauty products.
-                   Also, please visit our 'tips' page, to become even more aware of sustainability on your next beauty purchase.
-            </Typography>
-            
-            { !isAuthenticated? (
-                 <div></div>
-            
-            ) : (
-                
-                <a href="/register"> 
-                 <Button variant="outlined" color="default" size='medium' className={classes.registerBTN}>
-                      Register
-                 </Button>
-                 </a>
-            )
-           
-            }  
-        </CardContent>
+    <CardContent className={classes.overlay}>
+    <Typography variant="h1" className={classes.title}>
+            Making Beauty Sustainable
+    </Typography>
+    <Typography variant="body1" className={classes.subtitle}>
+        The beauty industry creates 120 billion units of packaging every year. 
+        {/* In 2015, research found that packaging accounted for 146 million tonnes of plastic every year. */}
+        Our goal is to make beauty more sustainable by giving people the opportunity to donate or recycle their beauty products.
+        Also, please visit our 'tips' page, to become even more aware of sustainability on your next beauty purchase.
+    </Typography>
+    { !isAuthenticated? (
+                <div></div>
         
+        ) : (
+            
+            <a href="/register"> 
+                <Button variant="outlined" color="default" size='medium' className={classes.registerBTN}>
+                    Register
+                </Button>
+                </a>
+        )
+    } 
+    <video autoPlay loop muted
+            style={{
+                top: 0,
+                left: 0,
+                height:580,
+                width: 1220,
+                margin: "auto",
+                objectFit: "cover",
+                zIndex: -2,
+                opacity: 0.45,
+            }}>
+            <source src={Hiravideo} type="video/mp4"/>     
+    </video> 
+    </CardContent>
     </Box>
-    
 
     <Typography className={classes.bottom}>
         We accept most skincare and makeup products for donations and recycling. We priotize  the products that most people use as part of their daily routine. Whether they come in paper, plastic, or glass, we will gladly accept them. Here are some examples of what we accept.
