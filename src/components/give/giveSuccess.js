@@ -1,7 +1,7 @@
 import './giveSuccess.css';
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
-import { Box, Typography, Grid } from "@material-ui/core"
+import { Box, Typography, Grid, Container } from "@material-ui/core"
 import Confirmation from './Confirmation';
 // import { useNavigate } from "react-router";
 
@@ -194,8 +194,7 @@ export class MapContainer extends Component {
       </Grid>)}
       {this.state.selectedCenter !== "" && (<div>
         <Confirmation center={this.state.selectedCenter}/>
-        
-          <Box>
+        <Container style={{ width: 1235}}>
           <Map 
               className="map2"
               google={this.props.google}
@@ -216,19 +215,7 @@ export class MapContainer extends Component {
             /> */}
             
           </Map>
-          {/* <Grid spacing={2}>
-                <a href="/"> 
-                    <Button variant="outlined" color="default" size='medium' className={this.button}>
-                        Home
-                    </Button>
-                </a>
-                <a href="/tips"> 
-                    <Button variant="outlined" color="default" size='medium' className={this.button}>
-                        Tips
-                    </Button>
-                </a>  
-            </Grid> */}
-          </Box>
+          </Container>
               
         </div>)}
       </>

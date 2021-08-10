@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
+import {Link as Rlink} from 'react-router-dom'; 
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
@@ -176,9 +177,9 @@ export default function Register() {
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
-              <Link to="/login" variant="body2" >
-               <div className="text"> Already have an account? Login</div>
-              </Link>
+              <Rlink to="/login" variant="body2" >
+               <div className="blue"> Already have an account? Login</div>
+              </Rlink>
             </Grid>
           </Grid>
         </form>
