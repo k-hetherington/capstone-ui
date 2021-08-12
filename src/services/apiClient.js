@@ -72,6 +72,7 @@ class ApiClient {
   async viewPoints(){
     return await this.request({endpoint:`points`, method: `GET`})
   }
+
   
   async logoutUser() {
     console.log("user is logged out")

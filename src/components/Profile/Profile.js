@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 export default function Profile({user, logoutUser, donateNumber, recycleNumber, fetchDonations, fetchRecycles, ProfileApp, points, pointsData}) {
-   
+  // console.log(String.fromCodePoint(...user.upload_pic))
     useEffect(() => {
         ProfileApp()
         fetchDonations()
@@ -39,12 +39,6 @@ export default function Profile({user, logoutUser, donateNumber, recycleNumber, 
     console.log(user.profile_pic)
     const navigate = useNavigate()
    
-    const StyledButton = withStyles({
-            root:{
-                borderRadius:1,
-                border: '1px solid black',
-            },
-        })(Button);
 
     const handleOnLogout = async ()=>{
         await logoutUser()
@@ -64,6 +58,7 @@ export default function Profile({user, logoutUser, donateNumber, recycleNumber, 
         <div className= "profile">
             <div className="info">
                 <div className="avatar">
+                {/* <Avatar src={user.upload_pic} style={{ height: '140px', width: '140px' }}></Avatar> */}
                     {user.profile_pic?(
                         <Avatar src={user.profile_pic} style={{ height: '140px', width: '140px' }}></Avatar>
                         ):(
@@ -73,21 +68,21 @@ export default function Profile({user, logoutUser, donateNumber, recycleNumber, 
                
                 <div className="user-info">
                    
-                <h2 className="text"> <div className="settings"> Username: <br/>{user.username}</div>
-                <div className="settings">Email:<br/> {user.email}</div>
-                Zip Code:<br/> {user.zip_code}
+                <h2 className="text"> <div className="settings"> Username: <br/> <div className="lighter">{user.username}</div></div>
+                <div className="settings">Email:<br/> <div className="lighter">{user.email}</div></div>
+                Zip Code:<br/> <div className="lighter">{user.zip_code}</div>
                 </h2>
                         {!user.profile_pic?(<div >
                             <div className="settings">
-                            <StyledButton  variant="outlined" onClick={handleOnClick}>Settings</StyledButton>
+                            <Button  variant="outlined" onClick={handleOnClick}>Settings</Button>
                             </div>
                             <div className="settings">
                             <SimpleModal /> </div>
                             <div className="settings">
-                            <StyledButton  variant="outlined" onClick={handleOnLogout}>Log Out</StyledButton></div></div>
-                        ) :(<><div className="settings"><StyledButton  variant="outlined" onClick={handleOnClick}>Settings</StyledButton></div>
+                            <Button  variant="outlined" onClick={handleOnLogout}>Log Out</Button></div></div>
+                        ) :(<><div className="settings"><Button  variant="outlined" onClick={handleOnClick}>Settings</Button></div>
                        
-                       <div className="settings"><StyledButton  variant="outlined" onClick={handleOnLogout}>Log Out</StyledButton></div></>)}
+                       <div className="settings"><Button  variant="outlined" onClick={handleOnLogout}>Log Out</Button></div></>)}
                 </div>
             </div>
            <div className="user">
@@ -103,7 +98,7 @@ export default function Profile({user, logoutUser, donateNumber, recycleNumber, 
                         <h2 className="text">{donateNumber}</h2>
                     <h2 className="text">Products Donated!</h2>
                     <div className="btns">
-                    <StyledButton className="btn" variant="outlined" onClick={goToDonations}>View Products</StyledButton>
+                    <Button className="btn" variant="outlined" onClick={goToDonations}>View Products</Button>
                     </div>
                     </Card>
                 </div>
@@ -115,7 +110,7 @@ export default function Profile({user, logoutUser, donateNumber, recycleNumber, 
                     <h2 className="text">{recycleNumber}</h2>
                     <h2 className="text" >Products Recycled!</h2>
                     <div className="btns">
-                    <StyledButton className="btn" variant="outlined" onClick={goToRecycled}>View Products</StyledButton>
+                    <Button className="btn" variant="outlined" onClick={goToRecycled}>View Products</Button>
                     </div>       
                     </Card>
                 </div>

@@ -27,13 +27,10 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(2, 4, 3),
       },
   }));
-export default function Points({ points, pointsData}) {
-    const StyledButton = withStyles({
-        root:{
-            borderRadius:1,
-            borderColor:'black',
-        },
-    })(Button);
+export default function Points({ points, pointsData, recycleNumber, donateNumber}) {
+  var min = 100000
+  var max = 999999
+  var rand = Math.floor( min +(Math.random() * (max-min)))
 
     const [open, setOpen] = useState(false);
 
@@ -41,7 +38,6 @@ export default function Points({ points, pointsData}) {
         //change state to be null
         setOpen(true);
         await apiClient.redeemPoints()
-        console.log("redeemed")
     }
     useEffect(()=>{
        pointsData()
@@ -74,19 +70,24 @@ export default function Points({ points, pointsData}) {
             <Grid container spacing={2} className="points" direction="row" justifyContent="center">
             <Grid container spacing={2} justifyContent="center">
             <div className="cards">
-             <Card className={classes.root}>  <h2 className="text">Your Total Products:</h2> 
+             <Card className={classes.root}>  <h2 className="text">Points:</h2> 
              <h2 className="text">{points}</h2></Card>
              </div>
            <div className="cards">
             <Card className={classes.root}>   <h2 className="text">Free Products: </h2>
             <h2 className="text">{Math.floor(Number(points)/20)}</h2> </Card>
             </div>
+            <div className="cards">
+            <Card className={classes.root}>   <h2 className="text">Redeemed Products: </h2>
+            <h2 className="text">{Math.floor((recycleNumber+donateNumber)/20)}</h2> </Card>
+            </div>
             </Grid>
             <Grid item xs={6} >
                 {(Math.floor(Number(points)/20) !==0)?(
-                <StyledButton className="btn" variant="outlined" onClick={handlePoints}>Redeem Your Free Products!</StyledButton>
+                <Button className="btn" variant="outlined" onClick={handlePoints}>Redeem Your Free Products!</Button>
                  ):(<></>)
-                }</Grid>
+                }
+                </Grid>
                       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -102,7 +103,7 @@ export default function Points({ points, pointsData}) {
         <Fade in={open}>
           <div className={classes.paper}>
             <h2 id="transition-modal-title">Thank you for redeeming your points!</h2>
-            <p id="transition-modal-description">Please go to the nearest Hīrā Dropoff Center to get your free product!</p>
+            <p id="transition-modal-description">Please go to the nearest Hīrā Dropoff Center and present this confirmation number #{rand} to get your free product!</p>
           </div>
         </Fade>
       </Modal>

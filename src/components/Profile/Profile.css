@@ -21,7 +21,6 @@
 .user{
     grid-column:2;
     grid-row:1;
-    padding:5%;
 }
 .avatar{
     order:-1;
@@ -32,6 +31,8 @@
 }
 .user{
    display:block;
+   padding-left:5%;
+   padding-top:5%;
 }
 .welcome{
     font-family: 'Arima Madurai', cursive;
@@ -66,7 +67,7 @@
    
 }
 
-.user{
+.lighter{
     font-weight: lighter;
 }
 .btns{
