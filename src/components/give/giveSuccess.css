@@ -8,17 +8,15 @@
     letter-spacing: -0.015em;
     flex-wrap: wrap;
     display: flex;
-}
-
-.map{
     margin-left: 400px;
 }
 
-.map2{
-    align-content: center;
-    position: absolute;
-
+.googleMap{
+    margin-left: 0px;
+    
 }
+
+
 h2 {
     font-size: 30px;
 }

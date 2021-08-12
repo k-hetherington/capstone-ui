@@ -161,11 +161,12 @@ title: {
 },
 subtitle: {
    
-    maxWidth: "40%",
+    maxWidth: "50%",
     display: "flex",
     flexWrap: "wrap",
     // marginRight: "auto",
     marginTop: 210,
+    marginLeft: 250,
     padding: 20,
     fontFamily: "Arima Madurai",
     fontStyle: "normal",
@@ -173,7 +174,6 @@ subtitle: {
     fontSize: 20,
     position: "absolute",
     textAlign: "center",
-    alignItems: "center",
     // letterSpacing: "-0.015em",
     color: "#000000",
     
@@ -197,7 +197,7 @@ subtitle: {
 registerBTN: {
     paddingTop:10, //space between content , outer edge
     width: 270,
-    marginTop: 370,
+    marginTop: 400,
     marginLeft: 500,
     // height: 70,
     marginBottom: 15,
@@ -278,7 +278,7 @@ productSubtitle: {
     fontWeight: "normal",
     fontSize: 20,
     marginTop: 15,
-    marginBottom: 10,
+    marginBottom: 20,
     // marginLeft: 80,
     textAlign: "center",
     letterSpacing: "-0.015em",
@@ -307,8 +307,7 @@ export default function Home({ user, isAuthenticated }) {
     </Typography>
     <Typography variant="body1" className={classes.subtitle}>
         The beauty industry creates 120 billion units of packaging every year. 
-        {/* In 2015, research found that packaging accounted for 146 million tonnes of plastic every year. */}
-        Our goal is to make beauty more sustainable by giving people the opportunity to donate or recycle their beauty products.
+        {/* In 2015, research found that packaging accounted for 146 million tonnes of plastic every year. */} Our goal is to make beauty more sustainable by giving people the opportunity to donate or recycle their beauty products.
         Also, please visit our 'tips' page, to become even more aware of sustainability on your next beauty purchase.
     </Typography>
     { !isAuthenticated? (
