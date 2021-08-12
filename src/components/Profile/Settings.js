@@ -4,14 +4,17 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
+import { Link as RLink } from 'react-router-dom';
+import { Link } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import apiClient from "../../services/apiClient"
-
+import { useNavigate } from 'react-router';
+import { useAuthContext } from '../../Contexts/auth';
 import "../Login/Login.css"
+
 function Copyright() {
   return (
     <div variant="body2" color="textSecondary" align="center" className="text">
@@ -43,75 +46,108 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  blue:{
+    fontFamily : 'Arima Madurai, cursive ',
+    textAlign: 'center',
+    marginLeft: 0,
+    color: '#3f51b5',
+    // marginRight: '65px',
+},
 }));
 
 //prop; data passed between components. 
 // open closed bracket inside settings call to reference a prop
 
-export default function Settings({user}) {
-  console.log("invoke")
+export default function Settings() {
   const [isProcessing, setIsProcessing] = useState(false)
   const [errors, setErrors] = useState({})
+  const {user, setUser} = useAuthContext()
+  const [userSettings, setUserSettings] = useState({ first_name: "", last_name: "", email: "", zip_code:""})
   // const [userSettings, setUserSettings] = useState({}); 
-  const classes= useStyles();
+  const navigate = useNavigate();
+  
+  console.log(userSettings)
+  
   const handleOnChange = e =>{
-    console.log(e.target.name)
-    console.log(e.target.value)
-    const newData = {
-      ...userSettings,
-      [e.target.name]: e.target.value
-    }
-    setUserSettings(newData)
+    setUserSettings((f) => ({ ...f, [e.target.name]: e.target.value }))
+   
+    // const newData = {
+    //   ...userSettings,
+    //   [e.target.name]: e.target.value
+    // }
+    // setUserSettings(newData);
   }
+
   useEffect(()=>{
     setUserSettings(user)
   }, [user])
-
-  const [password, setPassword] = useState({})
-
-  const [userSettings, setUserSettings] = useState({
-    first_name: "",
-    last_name: "",
-    email: "",
-    age:"",
-    zip_code:"",
-    password: ""
-  })
-
-  const updatePassword = (event) => {
-    setPassword({
-      ...password,
-      [event.target.name]: event.target.value
-    })
-  }
-
-  const [hide, show] = useState(true)
-  const showPasswordBox = () =>{
-    show(hide ? false : true)
-}
-
-
+  
   const handleOnSubmit = async (e) => {
-    e.preventDefault()
+    
     setIsProcessing(true)
-    setErrors((e) => ({ ...e, form: null }))
+    setErrors((e) => ({ ...e, userSettings: null }))
 
     const { data, error } = await apiClient.updateUser({
-      age: userSettings.age,
+
       zip_code: userSettings.zip_code,
       first_name: userSettings.first_name,
       last_name: userSettings.last_name,
       email: userSettings.email,
     })
+    if (error) setErrors((e) => ({ ...e, setUserSettings: error }))
+
+    if(data){
+      setUser(data.user)
+     
+      setIsProcessing(false)
+    }
+    
+    setIsProcessing(false)
+      
+    
+    
+    
+    
   }
+ 
+
+  // const [password, setPassword] = useState({})
+
+  
+
+  // const updatePassword = (event) => {
+  //   setPassword({
+  //     ...password,
+  //     [event.target.name]: event.target.value
+  //   })
+  // }
+
+//   const [hide, show] = useState(true)
+//   const showPasswordBox = () =>{
+//     show(hide ? false : true)
+// }
+
+
+  
+  const classes= useStyles();
   
   return (
     <Container component="main" maxWidth="xs" style={{ backgroundColor: '#ffffff',height: '100vh' }} >
       <CssBaseline />
       <div className={classes.paper}>
-        <h1 className="text">
+        
+        {
+        isProcessing?
+          <div> 
+            <p>Saved!</p>
+          </div> :
+          
+          <h1 className="text">
           Update User Info
         </h1>
+
+        
+        }
         
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
@@ -155,7 +191,7 @@ export default function Settings({user}) {
                 onChange={handleOnChange}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            {/* <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="age"
                 name="age"
@@ -167,7 +203,7 @@ export default function Settings({user}) {
                 value={userSettings.age}
                 onChange={handleOnChange}
               />
-            </Grid>
+            </Grid> */}
             <Grid item xs={12} sm={6}>
               <TextField
                 variant="outlined"
@@ -194,6 +230,15 @@ export default function Settings({user}) {
             Save Updates
             </div>
           </Button>
+          <Grid container justifyContent="center">
+            <Grid item>
+              <RLink to="/profile" variant="body" >
+                  <div className={classes.blue}>
+                    Go to your profile
+                  </div>
+              </RLink>
+            </Grid>
+          </Grid>
         </form>
       </div>
       

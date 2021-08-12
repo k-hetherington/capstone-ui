@@ -41,7 +41,7 @@ class ApiClient {
   }
 
   async updateUser(settings) {
-    return await this.request({ endpoint: `settings`, method: `POST`, data: settings })
+    return await this.request({ endpoint: `settings`, method: `PUT`, data: settings })
   }
 
   async loginUser(credentials) {

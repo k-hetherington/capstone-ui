@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import './give.css';
 import React from 'react';
-import { Button, Typography } from "@material-ui/core";
+import { Button, ImageListItem, Typography } from "@material-ui/core";
 import { TextField } from "@material-ui/core";
 import Container from '@material-ui/core/Container';
 import  Grid  from "@material-ui/core/Grid";
@@ -18,6 +18,7 @@ import { InputLabel, Select, MenuItem, ListSubheader } from "@material-ui/core";
 import { v4 as uuidv4 } from 'uuid';
 import Alert from '@material-ui/lab/Alert';
 import { red } from "@material-ui/core/colors";
+// import { validateGiving } from "../../../../beauty-api/models/giving";
 
 
 
@@ -48,8 +49,8 @@ const useStyles = makeStyles((theme) => ({
   formInputs: {
     '& .MuiTextField-root':{
       marginRight: theme.spacing(3),
-     
     },
+
     display:'flex',
   
   },
@@ -62,6 +63,20 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     minWidth: 180,
     marginTop: theme.spacing(2),
+    marginRight:'20px',
+    // textAlign:'flex-start',
+  },
+
+  qtySection:{
+    '& .MuiFormControl-root':{
+      marginRight: theme.spacing(3),
+    },
+
+    '& .MuiOutlinedInput-input':{
+      textAlign:'center',
+    },
+    maxWidth:108,
+    marginLeft:3,
   },
 
 formControl: {
@@ -70,33 +85,48 @@ formControl: {
       marginRight: theme.spacing(3),
     },
     marginTop: theme.spacing(2),
-    minWidth: 80,
+    minWidth: 108,
+  
   },
 
 submit: {
     margin: theme.spacing(3, 0, 2),
     width:'8rem',
-    
-    
   },
 
 typography:{
     fontFamily: 'Arima Madurai',
    marginBottom: '10px',
 },
+error:{
+  color:'red',
+  fontSize:'15px',
+  margin: 0,
+  // display:'flex',
+
+},
 }));
 
 
 
 
-export default function Give({ user, setUser, setDonateNumber, setDonations, setRecycleNumber, setRecycles, initialized, setFreeProducts}){
+export default function Give({ user, setUser, setDonateNumber, setDonations, setRecycleNumber, setRecycles, initialized}){
 
-    const navigate = useNavigate()
+    const navigate = useNavigate(
+      
+
+    )
     const [isProcessing, setIsProcessing] = useState(false)
-    const [errors, setErrors] = useState({})
+    const [errors, setErrors] = useState([])
+    
+   //Obehi: The give form data ~ input sections
+    const [form, setForm] = useState([
+      //prouct_pic isnt included we have default image of product_pic depending on what the product_type is
+       { product_type: "", quantity: "" , is_used: "",  id: uuidv4() }
+    ])
 
     //Obehi: useEffect function used to handle logic so if user is not logged in and/or registered , display an 
-    // authenticated view message, else allow them to give
+    // authenticated view message, else allow them tssso give
     useEffect(() => {
       if (user?.email) {
         navigate("/give/")
@@ -106,15 +136,7 @@ export default function Give({ user, setUser, setDonateNumber, setDonations, set
       }
     }, [user, navigate, initialized])
 
-
-
-    //Obehi: The give form data ~ input sections
-    const [form, setForm] = useState([
-      //prouct_pic isnt included we have default image of product_pic depending on what the product_type is
-       { product_type:"", quantity:"", is_used:"" , id: uuidv4()}, 
-    ])
-
-    console.log(form)
+    // console.log(form)
 
    
     //Obehi: Handles Default Pic rendering dependending on the product chosen to give
@@ -133,6 +155,7 @@ export default function Give({ user, setUser, setDonateNumber, setDonations, set
       const values = [...form];
       values[index][event.target.name]=event.target.value
       setForm(values);
+      
     };
 
     //Obehi: Handles click event of the add button
@@ -142,7 +165,6 @@ export default function Give({ user, setUser, setDonateNumber, setDonations, set
     
     //Obehi: Handles click event of the remove button
     const handleRemoveFields = index => {
-      console.log(index)
       const values = [...form];
       values.splice(index, 1);
       setForm(values);
@@ -151,41 +173,191 @@ export default function Give({ user, setUser, setDonateNumber, setDonations, set
     //Obehi: Handles Logic after the Submission of the form
     const handleOnSubmit = async () => {
       setIsProcessing(true)
-      setErrors((e) => ({ ...e, form: null }))
 
-      form.forEach(async (x) =>{
-        const{ data, error } = await apiClient.createGiving({
-
-          product_type: x.product_type,
-          quantity: x.quantity,
-          is_used: x.is_used,
-          product_pic: product_pic_default[x.product_type]
-        
-        })
-       
-        if(error) setErrors( setErrors((e) => ({ ...e, form: error })))
-
-        if(data.givings.is_used=== false){
-   
-           setDonations(donations=>[...donations, data.givings])
-           setDonateNumber(d=>{
-           return  d + data.givings.quantity})
+      // Map Over Form to check if every row is correct using validateGiving
+      // Check for any errors and set it to "errorResponses"
+      
+      // const errorResponses = await Promise.all(
+      //   form.map( x => apiClient.createGiving({
+      //       product_type: x.product_type,
+      //       quantity: x.quantity,
+      //       is_used: x.is_used,
+      //       product_pic: product_pic_default[x.product_type]
+      //     })
+      //   )
+      // )
+      //  console.log("Error Responses: " , errorResponses)
+      //  console.log(errorResponses.length)
+    let errorsArr = []
+    let errorsIndex = []
+     
+      const responses = await Promise.all(
+          form.map( x => apiClient.createGiving({
+              product_type: x.product_type,
+              quantity: x.quantity,
+              is_used: x.is_used,
+              product_pic: product_pic_default[x.product_type]
+            })
+          ) 
+        )
+  
+          console.log("Responses ", responses)
            
-        }
-         
-        if(data.givings.is_used ===true){
-         
-           setRecycles(recycles=>[...recycles, data.givings])
-           setRecycleNumber(r=>{
-           return  r + data.givings.quantity})
+           responses.forEach(function(item, index){
+              if(item.error !==null){
+                errorsArr.push(item.error)
+                errorsIndex.push(index)
+              }
+              else if(item.data.givings.is_used === false ){
+                console.log("Here at Donations")
+                setDonations(donations=>[...donations, item.data.givings])
+                setDonateNumber(d=>{
+                return  d + item.data.givings.quantity}) 
+              }
+              else if(item.data.givings.is_used === true ){
+                console.log("Here at Recycles")
+                setRecycles(recycles=>[...recycles, item.data.givings])
+                setRecycleNumber(r=>{
+                return  r + item.data.givings.quantity})
+              }   
+            })
+            
+            
+            if(errorsArr.length===0){
+              navigate("/give/giveSuccess")
+            }else{
+              console.log(errorsArr, errorsIndex)
+              setErrors(errorsArr)
+              // setDonations(donations=>[...donations, item.data.givings])
+              setForm(oldForm=> 
+                oldForm.filter((formData, index)  => 
+            
+                  errorsIndex.includes(index)
+                )
+              )
+            }
+        
+          
+          setIsProcessing(false)
+        
+        
+      
+      // navigate("/give/giveSuccess")
+      // if(!errors.length){
+        
+      // }
+        
    
-        }
 
-      })
-      setIsProcessing(false)
-      navigate("/give/giveSuccess")
-    }
+
+      
+     
+        // if there are absolutely no errors in any of the responses, then make a giving
+      
+        //  if (errorResponses.every( (res) =>  res.error === null  )){
+        
+        // const responses = await Promise.all(
+        //   form.map( x => apiClient.createGiving({
+        //       product_type: x.product_type,
+        //       quantity: x.quantity,
+        //       is_used: x.is_used,
+        //       product_pic: product_pic_default[x.product_type]
+        //     })
+        //   ),
+        // )
+
+        //There are no errors and this giving has been created
+        // console.log("Created Giving", responses)
+
+        //Sorting each data into either a donation or a recycle
+        
+      // }else{
+      //   errorResponses.forEach(function(item, index){
+      //     if(errorResponses[index].error !== null){
+      //       setErrors(errorResponses[index].error)
+      //       console.log(errorResponses[index].error)
+      //     }
+      //   })
+      // }    
+
+      
+      
     
+      
+    //  try{
+
+    //     const responses = await Promise.all(
+    //       form.map( x => apiClient.createGiving({
+    //           product_type: x.product_type,
+    //           quantity: x.quantity,
+    //           is_used: x.is_used,
+    //           product_pic: product_pic_default[x.product_type]
+    //         })
+    //       )
+    //     )
+    //       responses.forEach(function(item, index){
+    //           if(responses[index].data.givings.is_used === false ){
+    //             console.log("Here at Donations")
+    //             setDonations(donations=>[...donations, responses[index].data.givings])
+               
+    //                   setDonateNumber(d=>{
+    //                 return  d + responses[index].data.givings.quantity}) 
+    //           }
+    //           if(responses[index].data.givings.is_used === true ){
+    //             console.log("Here at Recycles")
+    //             setRecycles(recycles=>[...recycles, responses[index].data.givings])
+                
+    //                 setRecycleNumber(r=>{
+    //                 return  r + responses[index].data.givings.quantity})
+            
+    //           }
+                
+    //         })
+
+    //   }catch(err){
+    //     setErrors(err)
+    //   }
+      
+
+
+
+
+
+      
+      
+      
+      // const errorsArr =[]
+      // const allData= []
+
+
+      // responses.forEach(function (item, index){
+      //   if(responses[index].data === null){
+      //       errorsArr.push(responses[index].error) 
+      //       console.log("Pushed to errors")
+      //   }
+      //   else if(responses[index].data !== null  ){
+      //       allData.push(responses[index].data) 
+      //       console.log(errors)
+      //       console.log("Pushed to Alldata")
+      //   }
+        
+      // })
+
+      console.log(errors)
+          
+
+      // If there's errors set them if not navigate to next page
+      // if(errorResponses){
+      //   setErrors(errorResponses.message)
+      // }else{
+      //   navigate("/give/giveSuccess")
+      // }
+     
+      setIsProcessing(false)
+      
+    }
+
+    console.log(errors)
  
   const classes = useStyles();
   
@@ -212,70 +384,95 @@ export default function Give({ user, setUser, setDonateNumber, setDonations, set
 
               <Grid item xs={6} sm={6} md={6} className="giveForm" component={Paper} elevation={0}>
                 <div className={classes.paper}>
-                
-                    {/* <Typography className={classes.typography}>Enter min:1 max:5 entries on a single submission</Typography> */}
-                    <Alert variant="outlined" severity="warning" className={classes.typography}>
-                         Enter 1-5 recycle/donate entries
-                    </Alert>
+
+                    {
+                        // <Alert variant="outlined" severity="warning" className={classes.typography}>
+                        //     Enter 1-5 recycle/donate entries
+                        //  </Alert>
+                      errors.length ===0?
+                      <div>
+                        <Alert variant="outlined" severity="warning" className={classes.typography}>
+                            Enter 1-5 recycle/donate entries
+                        </Alert>
+                      </div> : 
+                      
+                      <div>           
+                             { errors.map( error => 
+                                <p className={classes.error}>{error} </p>
+                              )
+                            } 
+
+                       </div>
+                    
+                    }
+
+                  <form noValidate>
                   
-                  
-                  <form  noValidate>
                     
                     { form.map((userInput, index) => (
                        <div key={userInput.id} className={classes.formInputs}>
                        
                           {/* Product Type Input Box */}
                           <FormControl className={classes.productType} variant="outlined">
-                            <InputLabel htmlFor="demo-simple-select-outlined-label">Product</InputLabel>
-                            <Select defaultValue="" 
+                            <InputLabel htmlFor="demo-simple-select-outlined-label">* Product</InputLabel>
+                            <Select 
                               labelId="demo-simple-select-outlined-label" 
-                              label="product"
-                              id="grouped-select-outlined" 
+                              label="*product"
                               value={form.product_type} 
                               name="product_type" 
                               onChange={event=> handleChange(index, event)}
+                              required
                               >
                               <ListSubheader>SkinCare</ListSubheader>
-                                <MenuItem value={"Serum"}>Serums</MenuItem>
-                                <MenuItem value={"Moisturizer"}>Moisturizers/Sun</MenuItem>
+                                <MenuItem value={"Serum"}>Serum</MenuItem>
+                                <MenuItem value={"Moisturizer"}>Moisturizer/Sun</MenuItem>
                                 <MenuItem value={"Cleanser"}>Cleanser</MenuItem>
                               <ListSubheader>MakeUp</ListSubheader>
-                                <MenuItem value={"Powder"}>Powders</MenuItem>
-                                <MenuItem value={"Mascara"}>Mascaras</MenuItem>
-                                <MenuItem value={"Foundation"}>Liquid Foundations</MenuItem>
-                                <MenuItem value={"Perfume"}>Perfumes</MenuItem>
+                                <MenuItem value={"Powder"}>Powder</MenuItem>
+                                <MenuItem value={"Mascara"}>Mascara</MenuItem>
+                                <MenuItem value={"Foundation"}>Liquid Foundation</MenuItem>
+                                <MenuItem value={"Perfume"}>Perfume</MenuItem>
                             </Select>
                           </FormControl>
       
                           {/* Quantity Input Box */}
+                          <FormControl>
+                          {/* <InputLabel htmlFor="demo-simple-select-outlined-label">*Quantity</InputLabel> */}
                           <TextField
-                              className="inputSection"
-                              variant="outlined"
-                              margin="normal"
-                              required
-                              fullWidth
-                              name="quantity"
-                              label="Quantity (min:1)"
-                              type="number"
-                              min="1"
-                              max="100000000"
-                              InputProps={{ inputProps: { min: 1, max: 100000000 } }}
-                              InputLabelProps={{ shrink: true, }}
-                              id="quantity"
-                              autoComplete="current-quantity"
-                              value={form.quantity}
-                              onChange={event=> handleChange(index, event)}
-                          />
+                                className={classes.qtySection}
+                                // id="grouped-select-outlined" 
+                                variant="outlined"
+                                margin="normal"
+                                fullWidth
+                                name="quantity"
+                                labelId="demo-simple-select-outlined-label"
+                                // id="demo-simple-select-outlined"
+                                // labelId="demo-simple-select-outlined-label" 
+                                 label="* Qty"
+                                type="number"
+                                min="1"
+                                max="100000000"
+                                InputProps={{ inputProps: { min: 1, max: 100000000 } }}
+                                InputLabelProps={{ shrink: true, }}
+                                // id="quantity"
+                                autoComplete="current-quantity"
+                                value={form.quantity}
+                                onChange={event=> handleChange(index, event)}
+                            />
+                          </FormControl>
+                            
+                      
+                          
 
                          {/* Obehi: Use Condition Input Box */}
                           <FormControl variant="outlined" className={classes.formControl}>
-                            <InputLabel id="demo-simple-select-outlined-label">Used?</InputLabel>
+                            <InputLabel id="demo-simple-select-outlined-label">* Used?</InputLabel>
                             <Select
                               labelId="demo-simple-select-outlined-label"
                               id="demo-simple-select-outlined"
                               name="is_used"
                               value={form.is_used}
-                              onChange={event=> handleChange(index, event)}
+                              onChange={ event=> handleChange(index, event) }
                               label="Used?"
                             >
                               {/* <MenuItem value="">
@@ -313,10 +510,11 @@ export default function Give({ user, setUser, setDonateNumber, setDonations, set
                   <Button
                         type="submit"
                         fullWidth
-                        variant="outlined"
+                        variant="contained"
                         className={classes.submit}
+                        onClick={handleOnSubmit}
                         disabled={isProcessing} 
-                        onClick={handleOnSubmit} >
+                         >
                        
                         {isProcessing ? "Loading..." : "Submit"}
                         
