@@ -46,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    background: "#cbf3f0",
   },
 }));
 
@@ -102,7 +103,8 @@ export default function Login() {
             <Button
               type="submit"
               fullWidth
-              color="primary"
+              color="#cbf3f0"
+              background="#cbf3f0"
               variant="contained"
               className={classes.submit}
               onClick={handleOnSubmit}

@@ -36,17 +36,16 @@ export default function Navbar({ user, logoutUser, isAuthenticated, intialized }
                     the login and register button*/}
                     { !isAuthenticated? (
                     <StyledMenu logoutUser={logoutUser} user={user}/>
-                    ):(<><Button className="login" variant="outlined" size='small'>
+                    ):(<><Button className="login" variant="outlined" size='medium'>
                         <Link to="/login">
                             Log In
                             </Link>
                     </Button>
-                    <Button className="register" variant="outlined" size='small'>
+                    <Button className="register" variant="outlined" size='medium'>
                         <Link to="/register">
                             Register
                          </Link>
                     </Button></>)}
-        
                 </ul>
             </nav>
            </Container>
