@@ -4,6 +4,8 @@ import { Button, withStyles, Grid, Card, makeStyles, Modal, Backdrop, Fade } fro
 import { PieChart } from 'react-minimal-pie-chart'
 import apiClient from "../../services/apiClient";
 import { useEffect, useState } from "react";
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -28,15 +30,23 @@ const useStyles = makeStyles((theme) => ({
       },
   }));
 export default function Points({ points, pointsData, recycleNumber, donateNumber}) {
+ const navigate = useNavigate()
+  const [confirmNum, setConfirmNum] = useState(null)
   var min = 100000
   var max = 999999
   var rand = Math.floor( min +(Math.random() * (max-min)))
-
+    
     const [open, setOpen] = useState(false);
+
+    const handleBack = ()=>{
+      navigate("/profile")
+    }
 
     const handlePoints = async () =>{
         //change state to be null
         setOpen(true);
+        setConfirmNum(rand)
+        //points -= 20
         await apiClient.redeemPoints()
     }
     useEffect(()=>{
@@ -54,10 +64,13 @@ export default function Points({ points, pointsData, recycleNumber, donateNumber
     
     const classes = useStyles()
     return (
-        <div>
+       
             <div  className="text">
-            <h1 className="header">Points</h1>
+              <div className="heading">
+             {/* <ArrowBackIcon onClick={handleBack}/>  */}
+            <h1 className="header"> Points</h1>
             </div>
+            
             <PieChart className="pie" style={{height: '180px'}}  lineWidth={30} label={({dataEntry})=> Math.round(dataEntry.percentage)+'%'} labelStyle={{
         fontSize: '20px',
         fontFamily: 'Arima Madurai',
@@ -103,7 +116,7 @@ export default function Points({ points, pointsData, recycleNumber, donateNumber
         <Fade in={open}>
           <div className={classes.paper}>
             <h2 id="transition-modal-title">Thank you for redeeming your points!</h2>
-            <p id="transition-modal-description">Please go to the nearest Hīrā Dropoff Center and present this confirmation number #{rand} to get your free product!</p>
+            <p id="transition-modal-description">Please go to the nearest Hīrā Dropoff Center and present this confirmation number #{confirmNum} to get your free product!</p>
           </div>
         </Fade>
       </Modal>
