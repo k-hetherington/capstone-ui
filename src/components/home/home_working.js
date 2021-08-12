@@ -14,9 +14,16 @@ import { findByLabelText } from '@testing-library/react';
 const useStyles = makeStyles((theme) => ({
     root:{
         display:'flex',
-        justifyContent:'center'
+        justifyContent:'center',
+        marginLeft: 'auto',
+    marginRight: 'auto',
+    paddingLeft: '16px',
+    paddingRight: '16px',
     },
-
+accident:{
+    display:'flex',
+        justifyContent:'center',
+},
 moisturizerPaper: {
     height: 320,
     width: 250,
@@ -166,12 +173,11 @@ title: {
 },
 subtitle: {
    
-    maxWidth: "50%",
+    maxWidth: "40%",
     display: "flex",
     flexWrap: "wrap",
     // marginRight: "auto",
     marginTop: 210,
-    marginLeft: 250,
     padding: 20,
     fontFamily: "Arima Madurai",
     fontStyle: "normal",
@@ -179,6 +185,7 @@ subtitle: {
     fontSize: 20,
     position: "absolute",
     textAlign: "center",
+    alignItems: "center",
     // letterSpacing: "-0.015em",
     color: "#000000",
     
@@ -202,7 +209,7 @@ subtitle: {
 registerBTN: {
     paddingTop:10, //space between content , outer edge
     width: 270,
-    marginTop: 400,
+    marginTop: 370,
     marginLeft: 500,
     // height: 70,
     marginBottom: 15,
@@ -283,7 +290,7 @@ productSubtitle: {
     fontWeight: "normal",
     fontSize: 20,
     marginTop: 15,
-    marginBottom: 20,
+    marginBottom: 10,
     // marginLeft: 80,
     textAlign: "left",
     letterSpacing: "-0.015em",
@@ -306,13 +313,15 @@ export default function Home({ user, isAuthenticated }) {
      
  <Container maxWidth="lg" minwidth='600px' style={{ backgroundColor: '#ffffff',height: '100vh' }}> 
     <Box className={classes.wrapper}>
-    <CardContent className={classes.overlay}>
+    {/* <CardContent className={classes.overlay}> */}
+    <div className="headings">
     <Typography variant="h1" className={classes.title}>
             Making Beauty Sustainable
     </Typography>
     <Typography variant="body1" className={classes.subtitle}>
         The beauty industry creates 120 billion units of packaging every year. 
-        {/* In 2015, research found that packaging accounted for 146 million tonnes of plastic every year. */} Our goal is to make beauty more sustainable by giving people the opportunity to donate or recycle their beauty products.
+        {/* In 2015, research found that packaging accounted for 146 million tonnes of plastic every year. */}
+        Our goal is to make beauty more sustainable by giving people the opportunity to donate or recycle their beauty products.
         Also, please visit our 'tips' page, to become even more aware of sustainability on your next beauty purchase.
     </Typography>
     { !isAuthenticated? (
@@ -326,7 +335,7 @@ export default function Home({ user, isAuthenticated }) {
                 </Button>
                 </a>
         )
-    } 
+    } </div>
     <video autoPlay loop muted
             style={{
                 top: 0,
@@ -340,7 +349,7 @@ export default function Home({ user, isAuthenticated }) {
             }}>
             <source src={Hiravideo} type="video/mp4"/>     
     </video> 
-    </CardContent>
+    {/* </CardContent> */}
     </Box>
 
     <Typography className={classes.bottom}>
@@ -355,7 +364,7 @@ export default function Home({ user, isAuthenticated }) {
         </Typography>
 
         <Grid className="skincare-examples">
-            <Grid container className={classes.root} spacing={2}>
+            <Grid container className={classes.accident} spacing={2}>
                 <Grid item xs={12}>
                     <Grid container spacing={10} >
                         {[0].map((value) => (
@@ -406,7 +415,7 @@ export default function Home({ user, isAuthenticated }) {
             Makeup
         </Typography>
         <Grid className="makeup-examples">
-            <Grid container className={classes.root} spacing={2}>
+            <Grid container className={classes.accident} spacing={2}>
                 <Grid item xs={12}>
                     <Grid container spacing={10} >
                     {[0].map((value) => (
@@ -471,5 +480,3 @@ export default function Home({ user, isAuthenticated }) {
 
   );
 }
-
-

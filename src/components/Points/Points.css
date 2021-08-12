@@ -53,3 +53,9 @@ h2{
 .space{
     padding-top: 2%;
 }
+.icon{
+    margin-left:10%;
+}
+.heading{
+    display: grid;
+}

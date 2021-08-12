@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom'
 
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-
+import currIcon from "../images/currIcon.png"
 import Geocode from "react-geocode";
 
 const useStyles = makeStyles((theme) => ({
@@ -99,25 +99,32 @@ export class MapContainer extends Component {
     selectedPlace: {},          // Shows the InfoWindow to the selected place upon a marker
     userPosition: {},
     selectedCenter: "",
+    selectedLat: "",
+    selectedLng: "",
   };
-  selectCenter = (centerName) => {
-    console.log('i clicked a button!')
+  selectCenter = (centerName, centerLat, centerLng) => {
     console.log(centerName)
+    console.log(centerLat, centerLng)
     this.setState({
       ...this.state,
-      selectedCenter: centerName
+      selectedCenter: centerName,
+      selectedLat: centerLat,
+      selectedLng: centerLng,
     })
   }
-  onMarkerClick = (props, marker, e) =>
+  onMarkerClick = (props, marker, e) => {
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true
     });
+    console.log(this);
+  }
+
   onClose = props => {
     if (this.state.showingInfoWindow) {
       this.setState({
-        showingInnpmfoWindow: false,
+        showingInfoWindow: false,
         activeMarker: null
       });
     }
@@ -126,7 +133,6 @@ export class MapContainer extends Component {
     Geocode.fromAddress(this.props.user.zip_code).then(
       (response) => {
         const { lat, lng } = response.results[0].geometry.location;
-        console.log(lat, lng);
         this.setState({
           ...this.state,
           userPosition: {latitude: lat, longitude: lng}
@@ -160,6 +166,8 @@ export class MapContainer extends Component {
                 position={ { lat: this.state.userPosition.latitude, lng: this.state.userPosition.longitude } }
                 onClick={this.onMarkerClick}
                 name={'Current Location'}
+                icon={currIcon}
+               
               />
             {/* use this to prevent retitive code*/}
               {centers.map(center => (
@@ -187,32 +195,32 @@ export class MapContainer extends Component {
           {centers.sort((a,b) => {if(a.distance < b.distance){return -1}else{return 1}}).map(center => (
             <Grid className="addy" container key={center.name}>              
               <Grid item xs={12}>
-                <Button classname="Button" onClick={() => this.selectCenter(center.nameText)} variant="outlined" color="primary">{center.nameComp}</Button>
+                <Button classname="Button" onClick={() => this.selectCenter(center.nameText, center.position.lat, center.position.lng)} variant="outlined" color="primary">{center.nameComp}</Button>
               </Grid>
             </Grid>))}
         </Grid>
       </Grid>)}
       {this.state.selectedCenter !== "" && (<div>
         <Confirmation center={this.state.selectedCenter}/>
-        <Container style={{ width: 1235}}>
+        <Container>
           <Map 
               className="map2"
               google={this.props.google}
               zoom={11}
-              center={ { lat: 37.8526, lng:  -122.3706 } } 
+              center={ { lat: 37.8128, lng: -122.2610 } } 
               style={mapStyles}
           >
           <Marker className="current location"
                 position={ { lat: this.state.userPosition.latitude, lng: this.state.userPosition.longitude } }
                 onClick={this.onMarkerClick}
                 name={'Current Location'}
+                icon={currIcon}
           />
-            {/* <Marker key={this.center.name}
-                position={this.center.position}
+          <Marker className="selected position"
+                position={ { lat: this.state.selectedLat, lng: this.state.selectedLng } }
                 onClick={this.onMarkerClick}
-                name={this.center.nameComp}
-            
-            /> */}
+                name={this.state.centerName}
+          />
             
           </Map>
           </Container>

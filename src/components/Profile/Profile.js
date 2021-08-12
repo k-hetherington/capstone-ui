@@ -8,6 +8,7 @@ import { Link } from "react-router-dom"
 import { useEffect } from "react"
 import apiClient from "../../services/apiClient"
 
+
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'block',
@@ -24,6 +25,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Profile({user, logoutUser, donateNumber, recycleNumber, fetchDonations, fetchRecycles, ProfileApp, points, pointsData}) {
   // console.log(String.fromCodePoint(...user.upload_pic))
+    
+
     useEffect(() => {
         ProfileApp()
         fetchDonations()
