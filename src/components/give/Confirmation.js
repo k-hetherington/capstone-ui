@@ -13,9 +13,9 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: "normal",
         padding: 20,
         fontSize: 30,
-        marginLeft: 350,
+        marginLeft: 300,
         marginTop: 50,
-        maxWidth: "50%",
+        maxWidth: "60%",
         display: "flex",
         flex: "flex-wrap",
         position: "center"
@@ -27,13 +27,14 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: "bold",
         padding: 0,
         fontSize: 24,
-        marginLeft: 340,
+        marginLeft: 430,
         marginBottom: 50,
         maxWidth: "50%",
         display: "flex",
         flex: "flex-wrap",
         position: "center"
     },
+
 }));
 export default function Confirmation({center}) {
     const classes = useStyles();

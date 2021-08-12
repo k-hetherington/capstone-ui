@@ -57,9 +57,16 @@ const OutlinedButtons = ()  => {
 
 const mapStyles = {
   width: "40%",
-  height: "30%",
+  height: "55%",
   position: "right",
   marginLeft: 200
+};
+
+const mapStyles2 = {
+  width: "70%",
+  height: "55%",
+  position: "center",
+  marginLeft: 100
 };
 
 const centers = [
@@ -151,7 +158,7 @@ export class MapContainer extends Component {
     return (
       <>
       {this.state.selectedCenter === "" && (
-      <Grid container>
+      <Grid container className="comps">
         <Grid item xs={12}><h1 className="title">{`Thank you for your donation!`}</h1></Grid>
         <Grid item xs={12} sm={6}>
           <h2 className="subtitle">Here are the nearest drop off centers: </h2>
@@ -206,9 +213,9 @@ export class MapContainer extends Component {
           <Map 
               className="map2"
               google={this.props.google}
-              zoom={11}
-              center={ { lat: 37.8128, lng: -122.2610 } } 
-              style={mapStyles}
+              center={ { lat: this.state.selectedLat, lng: this.state.selectedLng } } 
+              // zoom={11}
+              style={mapStyles2}
           >
           <Marker className="current location"
                 position={ { lat: this.state.userPosition.latitude, lng: this.state.userPosition.longitude } }

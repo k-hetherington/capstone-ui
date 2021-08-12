@@ -1,5 +1,6 @@
 import "./tips.css"
 import { Container, makeStyles, Paper, Grid, Avatar, Button } from "@material-ui/core";
+import { Tooltip } from "@material-ui/core";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -29,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     button:{
         background:"#ffffff",
         // paddingLeft:'34%',
-        // paddingBottom: '34%',
+        marginBottom: '30px',
         fontFamily:'Arima Madurai',
         
     },
@@ -90,11 +91,17 @@ export default function Tips(){
                                 </li>
                              </ul>
                             
+                            {/* <Tooltip aria-label="This will take you to another website" /> */}
+                                
+                            <Tooltip title="This will take you to another website">
                              <Button className={classes.button} variant="outlined" >
+                               
                                 <a href="https://www.hellomagazine.com/healthandbeauty/skincare-and-fragrances/2020042087964/how-to-have-a-sustainable-skincare-routine-tips/">
                                     Read More
                                 </a>
+                                
                             </Button>
+                            </Tooltip>
                         </Paper>
                     </Grid>
                     

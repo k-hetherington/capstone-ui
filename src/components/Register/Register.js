@@ -11,6 +11,8 @@ import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+import "./Register.css"
+
 import { useRegistrationForm } from "../../hooks/useRegistrationForm"
 import "../Login/Login.css"
 function Copyright() {
@@ -43,6 +45,8 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    background: "#cbf3f0",
+    color: "#000000"
   },
 }));
 
@@ -88,32 +92,6 @@ export default function Register() {
                 onChange={handleOnChange}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="age"
-                name="age"
-                variant="outlined"
-                required
-                fullWidth
-                id="age"
-                label={<span className="text">Age</span> }
-                value={form.age}
-                onChange={handleOnChange}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="zipCode"
-                label={<span className="text">Zip Code</span> }
-                name="zip_code"
-                autoComplete="zip"
-                value={form.zip_code}
-                onChange={handleOnChange}
-              />
-            </Grid>
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -124,6 +102,19 @@ export default function Register() {
                 name="username"
                 autoComplete="username"
                 value={form.username}
+                onChange={handleOnChange}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="zipCode"
+                label={<span className="text">Zip Code</span> }
+                name="zip_code"
+                autoComplete="zip"
+                value={form.zip_code}
                 onChange={handleOnChange}
               />
             </Grid>
@@ -164,7 +155,7 @@ export default function Register() {
           <Button
             type="submit"
             fullWidth
-            color="primary"
+            color="#cbf3f0"
             variant="contained"
             className={classes.submit}
            disabled={isProcessing}

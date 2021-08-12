@@ -57,7 +57,7 @@ export default function CustomizedMenus({user, logoutUser}) {
   }
   return (
     <div>
-      {user.profile_pic? (<Avatar src={user.profile_pic} style={{ height: '30px', width: '30px' , cursor:'pointer'}} className="avatar"
+      {user.profile_pic? (<Avatar src={user.profile_pic} style={{ height: '50px', width: '50px' , cursor:'pointer'}} className="avatar"
       aria-controls="customized-menu"
       aria-haspopup="true"
       onClick={handleClick}></Avatar>):

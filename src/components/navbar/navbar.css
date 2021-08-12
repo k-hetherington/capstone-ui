@@ -54,8 +54,11 @@ Button{
     font-family: 'Arima Madurai', cursive ;
     font-size: 27px;
     border: 1px solid #000000;
+    background: #FFFFFF;
     box-sizing: border-box;
     padding: 3px 3px;
+     margin: 0 auto;
+     height: 50%;
 
 }
 .register{
@@ -64,5 +67,11 @@ Button{
     background: #FFFFFF;
     border: 1px solid #000000;
     box-sizing: border-box;
+    padding-top: 25%;
+    height: 50%;
+    align-content: center;
+}
 
+Button{
+    margin-top: 50%;
 }
