@@ -71,7 +71,7 @@ export default function UserDonations({ donations, donateNumber }){
         <div className="Donations">
              <Container maxWidth="lg" style={{ backgroundColor: '#ffffff',height: '100vh' }}>
                 <Grid container className="usersDonations">
-                <ArrowBack onClick={handleBackProfile} style={{ fontSize:30 , paddingTop: '5%', cursor: 'pointer' }}/>
+                <span title='profile'>  <ArrowBack onClick={handleBackProfile} style={{ fontSize:30 , paddingTop: '5%', cursor: 'pointer' }}/></span>
                     <Grid container className={classes.title} >
                         
                         <h2 className={classes.viewDonatedTitle}>Total Donated Products: {donateNumber}</h2>

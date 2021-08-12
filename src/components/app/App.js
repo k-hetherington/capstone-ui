@@ -83,10 +83,12 @@ const App = ()=> {
          }
       }
       const pointsData = async () =>{
-        const {data} = await apiClient.viewPoints()
-        if (data){
-          setPoints(data.pointNumber.points_quantity)
+        const { data } = await apiClient.viewPoints()
+        if ( data !== null ) {
+          console.log("data", data)
           console.log(data.pointNumber.points_quantity)
+          setPoints(data.pointNumber.points_quantity)
+          console.log(data.pointNumber)
         }
       }
 

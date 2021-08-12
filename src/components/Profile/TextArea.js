@@ -49,10 +49,7 @@ export default function StateTextFields( {handleOnSubmit, form, setForm}) {
         
       </div>
       <div className="buttons">
-        <div className="submit">
-        <UploadButtons />
-      </div>
-      <StyledButton onClick={handlePicBtn} >Submit</StyledButton>
+      <Button variant="outlined" onClick={handlePicBtn} >Submit</Button>
       </div>
     </form>
   )

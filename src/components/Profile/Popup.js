@@ -36,12 +36,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function SimpleModal() {
-  const StyledButton = withStyles({
-    root:{
-        borderRadius:1,
-        border: '1px solid black',
-    },
-})(Button);
+
   const classes = useStyles();
   const {handleOnChange, handleOnSubmit, errors, isProcessing, form, setForm} = useModalForm()
   // getModalStyle is not a pure function, we roll the style only on the first render
@@ -58,16 +53,16 @@ export default function SimpleModal() {
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <h2 id="simple-modal-title">Please Enter Image Url or Upload</h2>
+      <h2 id="simple-modal-title">Please Enter Image Url</h2>
       <StateTextFields handleOnSubmit={handleOnSubmit} form={form} setForm={setForm}/>
     </div>
   );
 
   return (
     <div>
-      <StyledButton type="button" onClick={handleOpen}>
+      <Button type="button" variant="outlined" onClick={handleOpen}>
         Add Profile Picture
-      </StyledButton>
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}

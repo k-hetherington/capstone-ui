@@ -92,7 +92,7 @@ export default function Points({ points, pointsData, recycleNumber, donateNumber
             </div>
             <div className="cards">
             <Card className={classes.root}>   <h2 className="text">Redeemed Products: </h2>
-            <h2 className="text">{Math.floor((recycleNumber+donateNumber)/20)}</h2> </Card>
+            <h2 className="text">{Math.floor((recycleNumber+donateNumber)/20) -1}</h2> </Card>
             </div>
             </Grid>
             <Grid item xs={6} >
