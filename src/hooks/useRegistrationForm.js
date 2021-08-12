@@ -13,7 +13,6 @@ export const useRegistrationForm=()=>{
       email: "",
       first_name: "",
       last_name: "",
-      age:"",
       zip_code:"",
       username: "",
       password: ""
@@ -50,7 +49,6 @@ export const useRegistrationForm=()=>{
       const { data, error } = await apiClient.signupUser({
         email: form.email,
         username: form.username,
-        age: form.age,
         zip_code: form.zip_code,
         password: form.password,
         first_name: form.first_name,
