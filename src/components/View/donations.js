@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
     //  display:"flex",
+    paddingTop: '5%',
      paddingBottom: '5%',
      alignItems:'center',
      justifyContent:'space-between',
@@ -46,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
         borderColor:"primary.main"
     },
     media: {
-      height: '8%',
+      height: '7%',
       width: '100%',
       paddingTop: '56.25%', // 16:9
     },
@@ -76,7 +77,6 @@ export default function UserDonations({ donations, fetchDonations, donateNumber,
         <div className="Donations">
              <Container maxWidth="lg" style={{ backgroundColor: '#ffffff',height: '100vh' }}>
                 <Grid container className="usersDonations">
-                <span title='profile'>  <ArrowBack onClick={handleBackProfile} style={{ fontSize:30 , paddingTop: '5%', cursor: 'pointer' }}/></span>
                     <Grid container className={classes.title} >
                         
                         <h2 className={classes.viewDonatedTitle}>Total Donated Products: {donateNumber}</h2>

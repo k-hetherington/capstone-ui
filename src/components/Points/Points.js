@@ -34,6 +34,7 @@ export default function Points({ points, pointsData, recycleNumber, donateNumber
   const [confirmNum, setConfirmNum] = useState(null)
   var min = 100000
   var max = 999999
+  var redeemed = 0;
   var rand = Math.floor( min +(Math.random() * (max-min)))
     
     const [open, setOpen] = useState(false);
@@ -88,17 +89,21 @@ export default function Points({ points, pointsData, recycleNumber, donateNumber
              </div>
            <div className="cards">
             <Card className={classes.root}>   <h2 className="text">Free Products: </h2>
-            <h2 className="text">{Math.floor(Number(points)/20)}</h2> </Card>
+              <h2 className="text">{Math.floor(Number(points)/20)}</h2> 
+            </Card>
             </div>
             <div className="cards">
             <Card className={classes.root}>   <h2 className="text">Redeemed Products: </h2>
-            <h2 className="text">{Math.floor((recycleNumber+donateNumber)/20) -1}</h2> </Card>
+            <h2 className="text">{(Math.floor((recycleNumber+donateNumber)/20)) - 1 }</h2> 
+            </Card>
             </div>
             </Grid>
             <Grid item xs={6} >
-                {(Math.floor(Number(points)/20) !==0)?(
+                {(Math.floor(Number(points)/20) != 0)?(
                 <Button className="btn" variant="outlined" onClick={handlePoints}>Redeem Your Free Products!</Button>
-                 ):(<></>)
+                 ):(<>
+                 
+                 </>)
                 }
                 </Grid>
                       <Modal

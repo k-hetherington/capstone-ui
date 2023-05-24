@@ -105,7 +105,20 @@ export default function Register() {
                 onChange={handleOnChange}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                autoComplete="age"
+                name="age"
+                variant="outlined"
+                required
+                fullWidth
+                id="age"
+                label={<span className="text">Age</span> }
+                value={form.age}
+                onChange={handleOnChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
               <TextField
                 variant="outlined"
                 required

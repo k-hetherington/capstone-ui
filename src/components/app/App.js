@@ -55,7 +55,7 @@ const App = ()=> {
       
       
       //Rendering all user had donated
-      const fetchDonations = async () => { console.log("Here!!")
+      const fetchDonations = async () => { 
         const { data, error } = await apiClient.fetchDonations()
         if (error) setError(error)
         if (data?.donations) {
@@ -79,16 +79,15 @@ const App = ()=> {
           const { data } = await apiClient.fetchNumberDonationsRecycled()
           if (data)  {
           setRecycleNumber(data.recycleNumber)
-         setDonateNumber(data.donationNumber)
+          setDonateNumber(data.donationNumber)
          }
       }
       const pointsData = async () =>{
         const { data } = await apiClient.viewPoints()
-        if ( data !== null ) {
-          console.log("data", data)
-          console.log(data.pointNumber.points_quantity)
-          setPoints(data.pointNumber.points_quantity)
-          console.log(data.pointNumber)
+        if ( data != null ) {
+          // console.log("data", data)
+          // setPoints(data.pointNumber.points_quantity)
+          setPoints(data.pointNumber)
         }
       }
 

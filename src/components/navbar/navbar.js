@@ -9,7 +9,7 @@ import StyledMenu from "../Menu/Menu"
 
 export default function Navbar({ user, logoutUser, isAuthenticated, intialized }){
     return (
-         <Container style={{ backgroundColor: '#cbf3f0', maxWidth: 1235}}>
+         <Container style={{ backgroundColor: '#ffffff', }}>
             <nav>
                 <ul className="navbar-titles">
                     <li>

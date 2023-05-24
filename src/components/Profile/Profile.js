@@ -39,7 +39,6 @@ export default function Profile({user, logoutUser, donateNumber, recycleNumber, 
 
     const classes= useStyles()
 
-    console.log(user.profile_pic)
     const navigate = useNavigate()
    
 

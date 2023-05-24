@@ -72,7 +72,6 @@ const useStyles = makeStyles((theme) => ({
         <div className="Recycles">
              <Container maxWidth="lg" style={{ backgroundColor: '#ffffff',height: '100vh' }}>
                 <Grid container className="usersRecycles">
-              <span title='profile'>  <ArrowBack onClick={handleBackProfile} style={{ fontSize:30 , paddingTop: '5%', cursor: 'pointer' }}/></span>
                     <Grid container className={classes.title} >
                         <h2 className={classes.viewRecycledTitle}>Total Recycled Products: {recycleNumber}</h2>
                         <Button className={classes.Button} onClick={handleOnClick} variant="outlined" size="small">
